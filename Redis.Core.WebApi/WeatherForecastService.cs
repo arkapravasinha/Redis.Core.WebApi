@@ -31,12 +31,12 @@ namespace Redis.Core.WebApi
             var dataFromCache = await _cache.GetRecordAsync<IEnumerable<WeatherForecast>>(WeatherData_Key);
             if (dataFromCache != null)
             {
-                _logger.LogInformation("Data loaded from cache");
+                _logger.LogInformation("Data loaded from cache @"+DateTime.Now);
                 return dataFromCache;
             }
             else
             {
-                _logger.LogInformation("Data loaded from db");
+                _logger.LogInformation("Data loaded from db @"+DateTime.Now);
                 var dataFromDb = GetDataFromDB();
                 await _cache.SetRecordAsync<IEnumerable<WeatherForecast>>(dataFromDb, WeatherData_Key);
                 return dataFromDb;
